@@ -105,19 +105,7 @@
 			<img class="logout_icon" src="{% static 'logout_icon.jpg' %}" alt="" style="margin-right: 125px;">
 			<img class="logout_icon" src="{% static 'profile_icon.jpg' %}" alt="" style="margin-right: 100px;">
 
-			<br>
-			<a class="link" href="{% url 'about us' %}">know about us</a>
-			<a class="link" href="{% url 'logout' %}">Logout</a>
-			<a class="link" href="{% url 'My Profile' %}">My Profile</a>
-
-			<a href=""></a>
-			
-			<!-- i did this one,
-			if the logged in user is admin, he has a link to admin page, -->
-			{% if request.user.is_admin %}
-				<a class="link" href="{% url 'admin_page' %}">admin</a>
-			{% endif %}
-		<!-- </div> -->
+			<br> -->
 		<div class="menu_bar">
 			<a class="link" href="{% url 'about us' %}">About us</a>
 			<div class="dropdown">
@@ -141,6 +129,7 @@
 
 
 		<em class="welcome">
+			<br>
 			<p>hello, {{request.user.username}}. How u doing?..</p>
 			<h2>Thanks for logging in to our website...</h2>
 		</em>
