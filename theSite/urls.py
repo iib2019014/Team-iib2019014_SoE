@@ -62,8 +62,8 @@ urlpatterns = [
 
     path('', home_page_view, name = "home_body"),
 
-    path('aboutus/', about_page_view, name = "about us"),
-    # path('aboutus/', wrong_about_page_view, name = "about us"),
+    # path('aboutus/', about_page_view, name = "about us"),
+    path('aboutus/', wrong_about_page_view, name = "about us"),
 
     path('register/', UserRegistration_view, name = "register"),
 
