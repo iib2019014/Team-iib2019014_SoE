@@ -1,0 +1,35 @@
+{% load static %}
+{% load custom_tags %}
+
+	<div class="menu_bar">
+		<a class="link" href="{% url 'about us' %}">About us</a>
+		<!-- <a class="link" href="{% anchor 'home' 'section-Buildings' %}">Buildings</a>
+		<a class="link" href="{% anchor 'home' 'section-Users' %}">Users</a> -->
+		<div class="dropdown">
+			<a class="dropdown_link" href="#">check weather by</a>
+				<div class="dropdown_content">
+					<a href="{% url 'weather_info' %}">Name</a>
+					<a href="{% url 'weather_info_2' %}">Coordinates</a>
+				</div>
+		</div>
+
+		<a class="link" href="{% url 'mainHome' %}">Ur Page</a>
+	</div>
+
+	<!-- <p style="font-family: monospace;">Wanna check this <img src="{% static 'temp.jpg' %}" alt="temp check img"> </p>
+	<p style="font-family: monospace;">for your <img src="{% static 'apartment.jpg' %}" alt="apartment check img"></p> -->
+
+	<div style="font-style: italic; color: rgb(255, 255, 255); font-size: 50px; margin-top: 300px; text-align: center; font-family: monospace;">
+		<p>Web based temperature monitor system</p>
+	</div>
+
+<!-- 
+	<h2 id="section-Buildings" style="font-family: monospace; color: darkcyan;">Buildings</h2>
+	<p style="font-family: monospace;">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Commodi perferendis
+		laborum quas quae ratione perspiciatis id placeat excepturi cum, quasi error, veniam reiciendis accusamus? In</p>
+
+	<h2 id="section-Users" style="font-family: monospace; color: darkcyan;">Users</h2>
+	<p style="font-family: monospace;">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nam blanditiis numquam
+		rem officiis inventore quam nobis commodi excepturi quaerat sunt tempora nihil fuga, praesentium natus iusto est</p> -->
+
+	<!-- <a href="{% anchor 'home' '' %}"><img class="goTop_img" src="{% static 'goTop.jpg' %}" alt=""></a> --> 

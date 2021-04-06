@@ -1,0 +1,25 @@
+{% block content %}
+<style>
+    .head {
+        margin-top: 300px;
+        font-family: monospace;
+        color: brown;
+    }
+</style>
+<body style="text-align:center;">
+    <h1 class="head">The coordinates of the place... for which u want to check weather</h1>
+    
+    <form method="post">{% csrf_token %}
+        
+        <!-- {{request_form.label_tag}}
+        {{request_form.name}} -->
+        
+        {{request_form.latitude}}
+        {{request_form.longitude}}
+    
+        <button type="submit" style="font-family: monospace; background-color: aliceblue;">submit</button>
+    </form>
+
+</body>
+
+{% endblock %}
