@@ -14,14 +14,6 @@
 			/* border-radius: 25px; */
 		}
 
-		.link {
-			color: darkcyan;
-			font-size: 30px;
-			margin-right: 25px;
-			font-family: monospace;
-			/* text-align: center; */
-		}
-
 		.welcome {
 			font-family: monospace;
 			color: darkgoldenrod;
@@ -40,11 +32,66 @@
 			border-radius: 15px;
 		}
 
-		.device_actions {
-			color: coral;
-			text-align: center;
+		.menu_bar{
+    		background-color: rgb(255, 255, 255);
+			border-radius: 100px;
+    		text-align: right;
+		}
+
+		.menu_bar:hover a:hover {
+			background-color:bisque;
+			border-radius: 5px;
+		}
+
+		.link {
+			/* color: darkcyan; */
+			color: rgb(155, 152, 152);
 			font-size: 30px;
+			margin-right: 45px;
 			font-family: monospace;
+			text-decoration:  none;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown_link {
+			/* color: darkcyan; */
+			color: rgb(155, 152, 152);
+			font-size: 30px;
+			margin-right: 45px;
+			font-family: monospace;
+			text-decoration:  none;
+		}
+
+		.dropdown_content {
+			display: none;
+			position: absolute;
+			background-color: rgb(255, 255, 255);
+			border-radius: 5px;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			/* color: darkcyan; */
+			color: rgb(155, 152, 152);
+			font-size: 30px;
+			margin-right: 45px;
+			font-family: monospace;
+		}
+
+		.dropdown_content a {
+			text-decoration: none;
+			/* color: darkcyan; */
+			color: rgb(155, 152, 152);
+		}
+
+		.dropdown:hover .dropdown_content {
+			display: block;
+		}
+
+		.dropdown_content a:hover {
+			background-color: #ddd;
 		}
 	</style>
 </head>
@@ -53,13 +100,33 @@
 	{% if user.is_authenticated %} <!-- check if user is logged in, -->
 		<!-- if the user is_authenticated or is logged in, take him to the mainHome page, -->
 		
-		<div style="text-align: right;">
+		<!-- <div style="text-align: right;">
 			<img class="logout_icon" src="{% static 'about_us_icon.jpg' %}" alt="" style="margin-right: 135px;">
 			<img class="logout_icon" src="{% static 'logout_icon.jpg' %}" alt="" style="margin-right: 125px;">
 			<img class="logout_icon" src="{% static 'profile_icon.jpg' %}" alt="" style="margin-right: 100px;">
 
 			<br>
 			<a class="link" href="{% url 'about us' %}">know about us</a>
+			<a class="link" href="{% url 'logout' %}">Logout</a>
+			<a class="link" href="{% url 'My Profile' %}">My Profile</a>
+
+			<a href=""></a>
+			
+			<!-- i did this one,
+			if the logged in user is admin, he has a link to admin page, -->
+			{% if request.user.is_admin %}
+				<a class="link" href="{% url 'admin_page' %}">admin</a>
+			{% endif %}
+		<!-- </div> -->
+		<div class="menu_bar">
+			<a class="link" href="{% url 'about us' %}">About us</a>
+			<div class="dropdown">
+				<a class="dropdown_link" href="#">check weather by</a>
+					<div class="dropdown_content">
+						<a href="{% url 'weather_info' %}">Name</a>
+						<a href="{% url 'weather_info_2' %}">Coordinates</a>
+					</div>
+			</div>
 			<a class="link" href="{% url 'logout' %}">Logout</a>
 			<a class="link" href="{% url 'My Profile' %}">My Profile</a>
 

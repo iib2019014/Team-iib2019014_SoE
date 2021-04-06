@@ -51,9 +51,18 @@ def weather_view(request) :
 
             city_weather = {
                 'city_name' : city_name,
+                'country' : r['sys']['country'],
+                'city_longitude' : r['coord']['lon'],
+                'city_latitude': r['coord']['lat'],
                 'temperature' : r['main']['temp'],
                 'description' : r['weather'][0]['description'],
                 'icon' : r['weather'][0]['icon'],
+                'feels_like' : r['main']['feels_like'],
+                'temp_min' : r['main']['temp_min'],
+                'temp_max' : r['main']['temp_max'],
+                'pressure' : r['main']['pressure'],
+                'humidity' : r['main']['humidity'],
+                'wind_speed' : r['wind']['speed'],
             }
             context['city_weather'] = city_weather
 

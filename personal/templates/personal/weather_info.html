@@ -13,17 +13,34 @@
        border-style: dotted;
    }
 </style>
-<body style="text-align:center; font-size: 35px;">
-    <h1 class="head">{{ city_weather.city_name }} weather</h1>
+{% if user.is_authenticated %}
+    <body style="text-align:center; font-size: 35px;">
+        <h1 class="head">{{ city_weather.city_name }} weather</h1>
+        <h2>Coordinates : {{ city_weather.city_latitude }} {{ city_weather.city_longitude }}</h2>
 
-    <figure class="image is-50x50">
-        <img class="weather_icon" src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
-    </figure>
-    
-    <p style="color: rgb(22, 223, 230);">
-        <span class="subtitle">{{ city_weather.temperature }}°C</span>
-        <br> {{ city_weather.description }}
-    </p>
-</body>
+        <figure class="image is-50x50">
+            <img class="weather_icon" src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+        </figure>
+        
+        <p style="color: rgb(22, 223, 230);">
+            <span class="subtitle">{{ city_weather.temperature }}°C</span>
+            <br> {{ city_weather.description }}
+        </p>
+    </body>
 
+    {% else %}
+    <body style="text-align:center; font-size: 35px;">
+        <h1 class="head">{{ city_weather.city_name }} weather</h1>
+
+        <figure class="image is-50x50">
+            <img class="weather_icon" src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+        </figure>
+        
+        <p style="color: rgb(22, 223, 230);">
+            <span class="subtitle">{{ city_weather.temperature }}°C</span>
+            <br> {{ city_weather.description }}
+        </p>
+    </body>
+
+{% endif %}
 {% endblock %}
