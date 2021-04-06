@@ -1,0 +1,22 @@
+{% block content %}
+<style>
+    .head {
+        margin-top: 300px;
+        font-family: monospace;
+        color: brown;
+    }
+</style>
+<body style="text-align:center;">
+    <h1 class="head">The building... in which the new user account is to be created</h1>
+    
+    <form method="post">{% csrf_token %}
+        
+        <!-- {{request_form.label_tag}} -->
+        {{request_form.building_id}}
+    
+        <button type="submit" style="font-family: monospace; background-color: aliceblue;">submit</button>
+    </form>
+
+</body>
+
+{% endblock %}

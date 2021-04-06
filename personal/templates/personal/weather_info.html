@@ -1,0 +1,61 @@
+{% block content %}
+
+<style>
+   .head {
+       font-family: monospace;
+       color: rgb(71, 71, 71);
+       /* margin-top: 300px; */
+       font-size: 15px;
+   }
+
+   .weather_icon {
+       border: 1px solid;
+       border-style: dotted;
+   }
+
+   .details {
+    border: 1px solid;
+    border-radius: 50px;
+    border-width: 20px;
+   }
+</style>
+    <body style="background-color: rgb(219, 218, 218); text-align: center;">
+        {% if user.is_authenticated %}
+            <div class="head">
+                <h2>{{ city_weather.city_name }} weather</h2>
+                <div class="details">
+                    <h3>Location</h3>
+                    <p><b>Coordinates</b> : {{ city_weather.city_latitude }}°N, {{ city_weather.city_longitude }}°E</p>
+                    <p><b>Country</b> : {{ city_weather.country}}</p>
+                </div>
+                <div class="details">
+                    <h3>Temperature Details</h3>
+                    <p><b>Temperature</b> --- {{ city_weather.temperature }}°C</p>
+                    <p><b>Minimum</b> --- {{ city_weather.temp_min }}°C</p>
+                    <p><b>Maximum</b> --- {{ city_weather.temp_max }}°C</p>
+                </div>
+                <div class="details">
+                    <h3>Weather</h3>
+                    <p><b>Feels like</b> {{ city_weather.feels_like }}°C</p>
+                    <p><b>Pressure</b> --- {{ city_weather.pressure }}</p>
+                    <p><b>Humidity</b> --- {{ city_weather.humidity }}</p>
+                    <p><b>{{ city_weather.description }}</b></p>
+                    <img class="weather_icon" src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                </div>
+            </div>
+        {% else %}
+            <div class="head">
+                <h2>{{ city_weather.city_name }} weather</h2>
+                <div class="details">
+                    <h3>Temperature Details</h3>
+                    <p><b>Temperature</b> --- {{ city_weather.temperature }}°C</p>
+                </div>
+                <div class="details">
+                    <h3>Weather</h3>
+                    <p><b>{{ city_weather.description }}</b></p>
+                    <img class="weather_icon" src="http://openweathermap.org/img/w/{{ city_weather.icon }}.png" alt="Image">
+                </div>
+            </div>
+        {% endif %}
+    </body>
+{% endblock %}
