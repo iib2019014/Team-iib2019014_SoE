@@ -84,12 +84,19 @@ def weather_view_2(request) :
             r = requests.get(name_url.format(city_latitude, city_longitude)).json()
 
             city_weather = {
-                # 'city_name' : r['current'],
+                'city_name' : r['name'],
+                'country' : r['sys']['country'],
                 'city_longitude' : city_longitude,
                 'city_latitude': city_latitude,
                 'temperature' : r['main']['temp'],
                 'description' : r['weather'][0]['description'],
                 'icon' : r['weather'][0]['icon'],
+                'feels_like' : r['main']['feels_like'],
+                'temp_min' : r['main']['temp_min'],
+                'temp_max' : r['main']['temp_max'],
+                'pressure' : r['main']['pressure'],
+                'humidity' : r['main']['humidity'],
+                'wind_speed' : r['wind']['speed'],
             }
             context['city_weather'] = city_weather
 
