@@ -44,7 +44,7 @@ def weather_view(request) :
         request_form = NameRequestForm(request.POST)
 
         if request_form.is_valid() :
-            print("ifif")
+            # print("ifif")
             request_form.save()
             city_name = request.POST.get('name')
             r = requests.get(name_url.format(city_name)).json()
