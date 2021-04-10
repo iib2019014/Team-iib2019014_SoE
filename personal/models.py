@@ -40,11 +40,11 @@ class BuildingRequest(models.Model) :
 class Building(models.Model) :
     building_name = models.CharField(max_length=30)
     building_id = models.CharField(max_length=50, primary_key=True)
+    owner_name = models.CharField(max_length=30, null =True)
+    longitude = models.CharField(max_length=25, null =True)
+    latitude = models.CharField(max_length=25, null =True)
 
     USERNAME_FIELD  = 'building_id'
-    # REQUIRED_FIELDS = ['building_id'] 9100025888
-
-    # objects = BuildingManager()
 
     def __str__(self) :
         return  self.building_id + self.building_name

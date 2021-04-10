@@ -20,6 +20,9 @@ from django.contrib.auth import logout
 # from django.views.generic import ListView
 # from account.models import Device
 
+# for showing all users,
+from .models import Account
+
 # Create your views here.
 
 
@@ -128,6 +131,12 @@ def admin_page_view(request) :
 		return render(request, 'account/admin_page.html', {})
 
 
-# # class based view for device list,
-# class device_list_view(ListView) :
-#     model = Device
+
+# show all users,
+def all_users_view(request) :
+	context = {}
+	users = Account.objects.all()
+
+	contex['users'] = users
+
+	return render(request, 'account/all_users.html', context)

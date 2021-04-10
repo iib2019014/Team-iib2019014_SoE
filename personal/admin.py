@@ -7,7 +7,7 @@ from .models import Building
 # Register your models here.
 # class BuildingAdmin(UserAdmin) :
 class BuildingAdmin(admin.ModelAdmin) :
-    list_display = ('building_name', 'building_id')
+    list_display = ('building_name', 'building_id', 'owner_name', 'longitude', 'latitude')
     search_fields = ('building_name', 'building_id')
     # readonly_fields                    = ('building_name', 'building_id')
 

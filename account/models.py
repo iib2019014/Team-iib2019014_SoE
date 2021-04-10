@@ -3,13 +3,15 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # import core.models
-# import personal.models
+import personal
 
 # Create your models here.
 
 
+
+
 class AccountManager(BaseUserManager) :
-    def create_user(self, email, username, firstname, building_id, password = None) :
+    def create_user(self, email, username, firstname, the_building, building_id = None, password = None) :
         if not email :
             raise ValueError("please provide a valid email...")
         if not username :
@@ -20,6 +22,7 @@ class AccountManager(BaseUserManager) :
                 email = self.normalize_email(email),
                 username = username,
                 building_id = building_id,
+                the_building = personal.models.Building.objects.get(building_id=building_id)
             )
 
             # user.set_password("123456")
@@ -55,6 +58,7 @@ class Account(AbstractBaseUser) :
     username                    = models.CharField(max_length=20, unique=True)
     firstname                   = models.CharField(max_length=20, unique=False)
     building_id                 = models.CharField(max_length=10, unique=False, default="")
+    the_building                = models.ForeignKey(personal.models.Building, on_delete=models.CASCADE)
 
 
 

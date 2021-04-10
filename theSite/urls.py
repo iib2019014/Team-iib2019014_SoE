@@ -40,6 +40,8 @@ from account.views import (
     AccountUpdate_view,
     admin_page_view,
 
+    all_users_view,
+
     # device_list_view,
 )
 
@@ -113,6 +115,8 @@ urlpatterns = [
     path('weather_info_2', weather_view_2, name = "weather_info_2"),
 
     path('get_building', ask_building_view, name = "get_building"),
+
+    path('mainHome/our_users', all_users_view, name = "all_users"),
 ]
 
 
