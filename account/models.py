@@ -26,6 +26,7 @@ class AccountManager(BaseUserManager) :
             )
 
             # user.set_password("123456")
+            # print("1111111111111111 hhhhheeeelllooooo")
             user.save(using = self._db)
 
             return user
@@ -40,7 +41,7 @@ class AccountManager(BaseUserManager) :
             superuser = self.model(
                 email = self.normalize_email(email),
                 username = username,
-                password = password
+                password = password,
             )
 
             superuser.is_admin = True
@@ -58,7 +59,7 @@ class Account(AbstractBaseUser) :
     username                    = models.CharField(max_length=20, unique=True)
     firstname                   = models.CharField(max_length=20, unique=False)
     building_id                 = models.CharField(max_length=10, unique=False, default="")
-    the_building                = models.ForeignKey(personal.models.Building, on_delete=models.CASCADE)
+    the_building                = models.ForeignKey(personal.models.Building, on_delete=models.CASCADE, null=True)
 
 
 

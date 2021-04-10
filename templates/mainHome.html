@@ -127,7 +127,8 @@
 			if the logged in user is admin, he has a link to admin page, -->
 			{% if request.user.is_admin %}
 				<a class="link" href="{% url 'admin_page' %}">admin</a>
-				<a class="link" href="{% url 'all_users'}"">USERS</a>
+				<a class="link" href="{% url 'all_users' %}">USERS</a>
+				<a class="link" href="{% url 'all_buildings' %}">BUILDINGS</a>
 			{% endif %}
 		</div>
 

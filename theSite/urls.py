@@ -41,6 +41,7 @@ from account.views import (
     admin_page_view,
 
     all_users_view,
+    all_buildings_view,
 
     # device_list_view,
 )
@@ -117,6 +118,8 @@ urlpatterns = [
     path('get_building', ask_building_view, name = "get_building"),
 
     path('mainHome/our_users', all_users_view, name = "all_users"),
+
+    path('mainHome/our_buildings', all_buildings_view, name = "all_buildings"),
 ]
 
 

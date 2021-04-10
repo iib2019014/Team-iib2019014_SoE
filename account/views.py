@@ -23,6 +23,9 @@ from django.contrib.auth import logout
 # for showing all users,
 from .models import Account
 
+# for showing all buildings,
+from personal.models import Building as Building_model
+
 # Create your views here.
 
 
@@ -137,6 +140,15 @@ def all_users_view(request) :
 	context = {}
 	users = Account.objects.all()
 
-	contex['users'] = users
+	context['users'] = users
 
 	return render(request, 'account/all_users.html', context)
+
+# show all buildings,
+def all_buildings_view(request) :
+	context = {}
+	buildings = Building_model.objects.all()
+
+	context['buildings'] = buildings
+
+	return render(request, 'account/all_buildings.html', context)

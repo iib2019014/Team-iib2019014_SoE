@@ -47,4 +47,4 @@ class Building(models.Model) :
     USERNAME_FIELD  = 'building_id'
 
     def __str__(self) :
-        return  self.building_id + self.building_name
+        return  self.building_id
