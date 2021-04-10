@@ -11,7 +11,8 @@ import personal
 
 
 class AccountManager(BaseUserManager) :
-    def create_user(self, email, username, firstname, the_building, building_id = None, password = None) :
+    def create_user(self, email, username, firstname, building_id = None, password = None) :
+        # print("into CU")
         if not email :
             raise ValueError("please provide a valid email...")
         if not username :
@@ -22,8 +23,11 @@ class AccountManager(BaseUserManager) :
                 email = self.normalize_email(email),
                 username = username,
                 building_id = building_id,
-                the_building = personal.models.Building.objects.get(building_id=building_id)
+                # the_building = personal.models.Building.objects.get(building_id=building_id)
             )
+
+            user.the_building = personal.models.Building.objects.get(building_id=building_id)
+            print("after yes")
 
             # user.set_password("123456")
             # print("1111111111111111 hhhhheeeelllooooo")
@@ -88,10 +92,3 @@ class Account(AbstractBaseUser) :
 
     def has_module_perms(self, app_label) :
         return True
-
-
-# class Device(models.Model) :
-#     device_name = models.CharField(max_length=20, unique=False)
-
-#     def __str__(self) :
-#         return self.device_name

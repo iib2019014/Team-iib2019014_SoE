@@ -40,10 +40,13 @@ def UserRegistration_view(request) :
 			print("ifif")
 			form.save()
 			email = form.cleaned_data.get('email')
-			raw_password = form.cleaned_data.get('password1')
+			raw_password = form.cleaned_data.get('password1')			
 
 			account = authenticate(email = email, password = raw_password)
 			login(request, account)
+			
+			request.user.the_building = Building_model.objects.get(building_id=request.POST.get('building_id'))
+			# print(request.user.the_building)
 
 			return redirect('mainHome')
 
