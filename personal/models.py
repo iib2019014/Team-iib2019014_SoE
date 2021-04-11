@@ -43,6 +43,9 @@ class Building(models.Model) :
     owner_name = models.CharField(max_length=30, null =True)
     longitude = models.CharField(max_length=25, null =True)
     latitude = models.CharField(max_length=25, null =True)
+    current_temp = models.FloatField()
+    max_temp = models.FloatField()
+    min_temp = models.FloatField()
 
     USERNAME_FIELD  = 'building_id'
 

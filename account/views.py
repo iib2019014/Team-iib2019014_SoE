@@ -46,7 +46,9 @@ def UserRegistration_view(request) :
 			login(request, account)
 			
 			request.user.the_building = Building_model.objects.get(building_id=request.POST.get('building_id'))
-			# print(request.user.the_building)
+			print(request.user.the_building)
+			request.user.save()		# required for saving the 'the_building' for the 'user',
+			
 
 			return redirect('mainHome')
 
