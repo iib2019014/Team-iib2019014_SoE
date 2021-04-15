@@ -45,12 +45,30 @@
 			<h2>Thanks for logging in to our website...</h2>
 		</em>
 
-		<div class="building_temp_info">
-			<p>ndewni</p>
-			<p>{{request.user.the_building}}</p>
-			<p>{{request.user.the_building.latitude}}</p>
-			<p>{{request.user.the_building.longitude}}</p>
-		</div>
+		{% if not request.user.is_staff %}
+			<div class="building_temp_info">
+				<div class="warning">
+					{% if request.user.the_building.temp_too_low %}
+						<p>Temperature in your apartment has fallen to very low temperature</p>
+					{% endif %}
+					{% if request.user.the_building.temp_too_high %}
+						<p>Temperature in your apartment has risen to very high temperature</p>
+					{% endif %}
+				</div>
+				<p>Your building name {{request.user.the_building.building_name}}</p>
+				<p>Building coordinates {{request.user.the_building.latitude}}°N, {{request.user.the_building.longitude}}°E</p>
+				<p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
+				<!-- <p>yester min temp {{request.user.the_building.the_yesterday_temp.min_temp}}</p> -->
+			</div>
+
+			<div class="building_temp_info">
+				<h2 style="color: aqua;">Past Extremes</h2>
+				<p>yesterday min temperature {{request.user.the_building.the_yesterday_temp.min_temp}}</p>
+				<p>yesterday max temperature {{request.user.the_building.the_yesterday_temp.max_temp}}</p>
+				<p>day before yesterday min temperature {{request.user.the_building.the_db_yesterday_temp.min_temp}}</p>
+				<p>day before yesterday max temperature {{request.user.the_building.the_db_yesterday_temp.max_temp}}</p>
+			</div>
+		{% endif %}
 		
 		<!-- make sure that for any hyperlink/ image u use the static rules -->
 

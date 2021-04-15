@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # import core.models
 import personal
+import requests
 
 # Create your models here.
 

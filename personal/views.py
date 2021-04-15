@@ -3,6 +3,7 @@ from django.shortcuts import render
 import requests
 
 from .forms import NameRequestForm, CoordRequestForm, BuildingRequestForm
+from .models import Temperature_object
 
 # Create your views here.
 
@@ -22,6 +23,11 @@ def wrong_about_page_view(request) :
 
 
 def mainHome_page_view(request) :
+    # print(request.user)
+    if(request.user.is_authenticated and not request.user.is_staff) :
+        # print(Temperature_object.objects.all().count())
+        # print(Temperature_object.objects.all())
+        request.user.the_building.update_temperature()
     return render(request, 'mainHome.html', {})
 
 

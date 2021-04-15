@@ -1,5 +1,5 @@
 from django.forms import ModelForm, TextInput
-from .models import NameRequest, CoordRequest, BuildingRequest
+from .models import NameRequest, CoordRequest, BuildingRequest, Building
 
 class NameRequestForm(ModelForm):
     class Meta:
@@ -20,3 +20,8 @@ class BuildingRequestForm(ModelForm):
         model = BuildingRequest
         fields = ['building_id']
         # widgets = {'building_id' : TextInput(attrs={'class' : 'input', 'placeholder' : 'City Name'})}
+
+class BuildingForm(ModelForm) :
+    class Meta :
+        model = Building
+        fields = ['building_name', 'building_id', 'owner_name', 'longitude', 'latitude']

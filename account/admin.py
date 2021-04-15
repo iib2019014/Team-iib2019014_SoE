@@ -7,6 +7,20 @@ from django.contrib.auth.admin import UserAdmin
 from account.models import Account
 
 from account.forms import UserRegistrationForm
+from account.views import UserRegistration_view
+
+# from django.conf.urls import url
+
+# def get_admin_urls(urls) :
+# 	def get_urls() :
+# 		the_urls = [
+# 			url('admin_registration', UserRegistration_view, name="admin_registration"),
+# 		]
+
+# 		return the_urls + urls
+# 	return get_urls
+# admin_urls = get_admin_urls(admin.site.get_urls())
+# admin.site.get_urls = admin_urls
 
 
 # Register your models here.
