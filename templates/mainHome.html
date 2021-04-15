@@ -57,8 +57,15 @@
 				</div>
 				<p>Your building name {{request.user.the_building.building_name}}</p>
 				<p>Building coordinates {{request.user.the_building.latitude}}°N, {{request.user.the_building.longitude}}°E</p>
-				<p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
+				<!-- <p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p> -->
 				<!-- <p>yester min temp {{request.user.the_building.the_yesterday_temp.min_temp}}</p> -->
+			</div>
+			
+			<div class="building_temp_info">
+				<h2 style="color: aqua;">Current Temperature</h2>
+				<p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
+				<p>Current minimum temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
+				<p>Current maximum temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
 			</div>
 
 			<div class="building_temp_info">
