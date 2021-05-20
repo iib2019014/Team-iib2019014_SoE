@@ -132,7 +132,7 @@ class Building(models.Model) :
         # # Temperature_object.objects.get(date=yesterday).max_temp = 29.07
         # # Temperature_object.objects.get(date=yesterday).save()
 
-        self.the_yesterday_temp = Temperature_object.objects.get(date=yesterday)
+        # self.the_yesterday_temp = Temperature_object.objects.get(date=yesterday)
 
         # db_yesterday_temp = Temperature_object()
         db_yesterday = today - timedelta(days = 2)
@@ -141,7 +141,7 @@ class Building(models.Model) :
         # db_yesterday_temp.max_temp = 28.17
         # db_yesterday_temp.save()
 
-        self.the_db_yesterday_temp = Temperature_object.objects.get(date=db_yesterday)
+        # self.the_db_yesterday_temp = Temperature_object.objects.get(date=db_yesterday)
 
         # # Temperature_object.objects.get(date=db_yesterday).min_temp = 27.57
         # # Temperature_object.objects.get(date=db_yesterday).max_temp = 28.17

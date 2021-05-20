@@ -21,7 +21,6 @@ def about_page_view(request) :
 def wrong_about_page_view(request) :
     return render(request, 'about2.html', {})
 
-
 def mainHome_page_view(request) :
     # print(request.user)
     if(request.user.is_authenticated and not request.user.is_staff) :
@@ -29,16 +28,6 @@ def mainHome_page_view(request) :
         # print(Temperature_object.objects.all())
         request.user.the_building.update_temperature()
     return render(request, 'mainHome.html', {})
-
-
-def install_page_view(request) :
-    return render(request, 'install.html', {})
-
-def remove_page_view(request) :
-    return render(request, 'remove.html', {})
-
-def control_page_view(request) :
-    return render(request, 'control.html', {})
 
 def weather_view(request) :
     name_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'

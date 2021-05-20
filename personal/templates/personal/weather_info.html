@@ -17,8 +17,16 @@
    .details {
     border: 1px solid;
     border-radius: 50px;
-    border-width: 20px;
+    /* border-width: 20px; */
    }
+
+   .back {
+			text-align: center;
+			font-size: 30px;
+			margin-right: 45px;
+			font-family: monospace;
+			text-decoration:  none;
+		}
 </style>
     <body style="background-color: rgb(219, 218, 218); text-align: center;">
         {% if user.is_authenticated %}
@@ -58,5 +66,9 @@
                 </div>
             </div>
         {% endif %}
+
+        <div class="back">
+            <a href="{% url 'home' %}" style="color: rgb(17, 0, 0); text-decoration: none;">Back to home</a>
+        </div>
     </body>
 {% endblock %}

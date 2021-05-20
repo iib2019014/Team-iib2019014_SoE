@@ -23,10 +23,6 @@ from personal.views import (
     wrong_about_page_view,
     mainHome_page_view,
 
-    install_page_view,
-    remove_page_view,
-    control_page_view,
-
     weather_view,
     weather_view_2,
 
@@ -100,14 +96,6 @@ urlpatterns = [
     
     path('mainHome/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
      name='password_reset_complete'),
-
-
-    
-    # urls for devices,
-    path('mainHome/install_device', install_page_view, name = "install"),
-    path('mainHome/install_device', remove_page_view, name = "remove"),
-    path('mainHome/install_device', control_page_view, name = "control"),
-
 
     # path('mainHome/your_devices', device_list_view.as_view(), name = "devices"),
 

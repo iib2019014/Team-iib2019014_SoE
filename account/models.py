@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # import core.models
-import personal
+from personal.models import Building
 import requests
 
 # Create your models here.
@@ -64,7 +64,7 @@ class Account(AbstractBaseUser) :
     username                    = models.CharField(max_length=20, unique=True)
     firstname                   = models.CharField(max_length=20, unique=False)
     building_id                 = models.CharField(max_length=10, unique=False, default="")
-    the_building                = models.ForeignKey(personal.models.Building, on_delete=models.CASCADE, null=True)
+    the_building                = models.ForeignKey(Building, on_delete=models.CASCADE, null=True)
 
 
 

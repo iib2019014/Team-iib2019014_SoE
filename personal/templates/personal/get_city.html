@@ -2,12 +2,28 @@
 
 
 <style>
+    body {
+    background-image: url("https://img.freepik.com/free-photo/old-black-background-grunge-texture-dark-wallpaper-blackboard-chalkboard-room-wall_1258-28313.jpg?size=626&ext=jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: monospace;
+    background-size: cover;
+    /* font-size: 45px; */
+  }
     .head {
         margin-top: 300px;
         font-family: monospace;
-        color: brown;
+        color: rgb(255, 255, 255);
     }
-			 </style>	
+
+    .back {
+			text-align: center;
+			font-size: 30px;
+			margin-right: 45px;
+			font-family: monospace;
+			text-decoration:  none;
+		}	
 </style>
 <body style="text-align:center;">
     <h1 class="head">The city... for which u want to check weather</h1>
@@ -19,6 +35,10 @@
     
         <button type="submit" style="font-family: monospace; background-color: aliceblue;">submit</button>
     </form>
+
+    <div class="back">
+        <a href="{% url 'home' %}" style="color: rgb(255, 255, 255); text-decoration: none;">Back to home</a>
+    </div>
 
 </body>
 

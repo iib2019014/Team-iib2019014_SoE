@@ -8,10 +8,14 @@ import personal.models
 
 class UserRegistrationForm(UserCreationForm) :
 	# gonna have these fields,
-	email		= forms.EmailField(max_length = 30, help_text = "Required. Please fill it...")
+	email = forms.CharField(max_length=30, widget = forms.EmailInput(attrs={'placeholder': 'email'}))
+	username = forms.CharField(max_length=30, widget=forms.TextInput(attrs={'placeholder': 'username'}))
+	password1 = forms.CharField(max_length=30, widget = forms.PasswordInput(attrs={'placeholder': 'Password'}))
+	password2 = forms.CharField(max_length=30, widget = forms.PasswordInput(attrs={'placeholder': 'confirm password'}))
 	
 	# this is for giving the user choices of availabel buildings from which he can choose one,
-	building_id = forms.ModelChoiceField(queryset=personal.models.Building.objects.all())
+	building_id = forms.ModelChoiceField(queryset=personal.models.Building.objects.all(), empty_label="Building ID")
+	# eneo = forms.ModelChoiceField()
 
 	class Meta :
 		model = Account		# tells dj what model does the form look like,
@@ -20,8 +24,8 @@ class UserRegistrationForm(UserCreationForm) :
 
 class AccountAuthenticationForm(forms.ModelForm) :
 	# gonna have these fields,
-	email		= forms.EmailField(label = 'Email', widget = forms.EmailInput)
-	password	= forms.CharField(label = 'Password', widget = forms.PasswordInput)
+	email		= forms.EmailField(label = 'Email', widget = forms.EmailInput(attrs={'placeholder': 'email'}))
+	password	= forms.CharField(label = 'Password', widget = forms.PasswordInput(attrs={'placeholder': 'password'}))
 
 	class Meta :
 		model = Account		# tells dj what model does the form look like,
