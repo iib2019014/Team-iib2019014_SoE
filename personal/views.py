@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 import requests # for getting the response for the url,
 
-from .forms import NameRequestForm, CoordRequestForm, BuildingRequestForm
+from account.models import Account
+from account.forms import AccountUpdationForm
+
+from .forms import NameRequestForm, CoordRequestForm, BuildingRequestForm, BuildingForm
 from .models import(
     Building,
 )
@@ -26,7 +29,58 @@ def wrong_about_page_view(request) :
 def mainHome_page_view(request) :
     if(request.user.is_authenticated and not request.user.is_staff) :
         update_temperature(request.user.building_id)
-    return render(request, 'mainHome.html', {})
+    
+    residents = Account.objects.all()
+    context = {}
+    context['residents'] = residents
+    return render(request, 'mainHome.html', context)
+
+def resident_detail_view(request, username) :
+    resident = Account.objects.get(username=username)
+    form = AccountUpdationForm(instance=resident)
+    context = {}
+
+    if request.method == 'POST': 
+        form = AccountUpdationForm(request.POST, instance=resident)
+        if form.is_valid() :
+            form.save()
+            return redirect('mainHome')
+
+    context['account_form'] = form
+    return render(request, 'personal/resident_details.html', context)
+
+def building_detail_view(request, building_id) :
+    building = Building.objects.get(building_id=building_id)
+    form = BuildingForm(instance=building_id)
+    context = {}
+
+    if request.method == 'POST': 
+        form = BuildingForm(request.POST, instance=building_id)
+        if form.is_valid() :
+            form.save()
+            return redirect('mainHome')
+
+    context['building_form'] = form
+    return render(request, 'personal/building_details.html', context)
+
+# def building_detail_view(request, building_id) :
+#     building = Building.objects.get(building_id=building_id)
+#     context = {}
+#     if request.POST :
+#         form = AccountUpdationForm(request.POST, instance = request.user)
+#         if form.is_valid() :
+#             form.save()
+
+#     else :
+#         form = AccountUpdationForm(
+#             initial = {
+#                 "email" : resident.email,
+#                 "username" : resident.username,
+#             }
+#         )
+        
+#     context['account_form'] = form
+#     return render(request, 'personal/resident_details.html', context)
 
 def weather_view(request) :
     name_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'

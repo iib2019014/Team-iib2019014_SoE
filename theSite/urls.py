@@ -27,6 +27,9 @@ from personal.views import (
     weather_view_2,
 
     ask_building_view,
+
+    resident_detail_view,
+    building_detail_view,
 )
 
 from account.views import (
@@ -108,6 +111,10 @@ urlpatterns = [
     path('mainHome/our_users', all_users_view, name = "all_users"),
 
     path('mainHome/our_buildings', all_buildings_view, name = "all_buildings"),
+
+
+    path('resident_details/<str:username>/', resident_detail_view, name='resident_details'),
+    path('building_details/<str:username>/', building_detail_view, name='building_details'),
 ]
 
 

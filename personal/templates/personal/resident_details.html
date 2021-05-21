@@ -1,0 +1,22 @@
+{% block content %}
+        <form method="POST" action="" >
+            {% csrf_token %}
+                {% for field in account_form %}
+            <p>
+                <em class="label_tag">{{field.label_tag}}</em>
+                <em style="background-color: brown;">{{field}}</em>
+                {% if field.help_text %}
+                    <small style="color: rgb(252, 19, 213);">{{field.help_text}}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <small style="color: red;">{{error}}</small>
+                {% endfor %}
+                {% if account_form.non_field_errors %}
+                    <!-- this is for the non-field errors, in our case if the user is not in DB he cannot login, so it is a validation error, -->
+                <small style="color: red;">{{account_form.non_field_errors}}</small>
+                {% endif %}
+            </p>
+                {% endfor %}
+                <button type="submit" onclick="click()" style="color: rgb(0, 0, 0); font-family: monospace; background-color:  white; margin-top: 25px;">SAVE CHANGES</button>		<!-- when button clicked, execute submit and run post method -->
+        </form>
+{% endblock %}

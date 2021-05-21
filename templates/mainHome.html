@@ -7,103 +7,133 @@
 
 <body class="bg">
 	{% if user.is_authenticated %}
-	<!-- check if user is logged in, -->
-	<!-- if the user is_authenticated or is logged in, take him to the mainHome page, -->
+		<!-- check if user is logged in, -->
+		<!-- if the user is_authenticated or is logged in, take him to the mainHome page, -->
 
-	<div class="menu_bar">
-		<a class="link" href="{% url 'about us' %}">About us</a>
-		<div class="dropdown">
-			<a class="dropdown_link" href="#">check weather by</a>
-			<div class="dropdown_content">
-				<a href="{% url 'weather_info' %}">Name</a>
-				<a href="{% url 'weather_info_2' %}">Coordinates</a>
+		<div class="menu_bar">
+			<a class="link" href="{% url 'about us' %}">About us</a>
+			<div class="dropdown">
+				<a class="dropdown_link" href="#">check weather by</a>
+				<div class="dropdown_content">
+					<a href="{% url 'weather_info' %}">Name</a>
+					<a href="{% url 'weather_info_2' %}">Coordinates</a>
+				</div>
 			</div>
+			<a class="link" href="{% url 'logout' %}">Logout</a>
+			<a class="link" href="{% url 'My Profile' %}">My Profile</a>
+			
+			{% if request.user.is_admin %}
+				<a class="link" href="{% url 'admin_page' %}">admin</a>
+				<a class="link" href="{% url 'all_users' %}">USERS</a>
+				<a class="link" href="{% url 'all_buildings' %}">BUILDINGS</a>
+			{% endif %}
 		</div>
-		<a class="link" href="{% url 'logout' %}">Logout</a>
-		<a class="link" href="{% url 'My Profile' %}">My Profile</a>
+
+
+		<em class="welcome">
+			<br>
+			<p>hello, {{request.user.username}}. How u doing?..</p>
+			<h2>Thanks for logging in to our website...</h2>
+		</em>
+
+		{% if not request.user.is_staff %}
+			<div class="warning">
+				{% if request.user.the_building.temp_too_low %}
+					<p>Currently temperature in your apartment is very low</p>
+				{% endif %}
+				{% if request.user.the_building.temp_too_high %}
+					<p>Currently temperature in your apartment is very high</p>
+				{% endif %}
+			</div>
+
+			<div class="building_temp_info">
+				<p>Your building name {{request.user.the_building.building_name}}</p>
+				<p>Building coordinates {{request.user.the_building.latitude}}°N, {{request.user.the_building.longitude}}°E</p>
+			</div>
+
+			<div class="building_temp_info">
+				<h2 style="color: aqua;">Current Temperature</h2>
+				<p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
+				<p>Current minimum temperature of your building surroundings {{request.user.the_building.min_temp}}°C</p>
+				<p>Current maximum temperature of your building surroundings {{request.user.the_building.max_temp}}°C</p>
+			</div>
+
+			<div style="text-align: center;">
+				<div style="text-align: center; margin-top: 10px; font-family: monospace; ">
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Extreme Temperatures in Past 30 Days
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<p>min temperature {{request.user.the_building.till_now_min}}</p>
+							<p>max temperature {{request.user.the_building.till_now_max}}</p>
+						</div>
+					</div>
+				</div>
+				<div style="text-align: center; margin-top: 10px; font-family: monospace ; ">
+					<div class="dropdown">
+						<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false">
+							Extreme Temperatures of Past Two Days
+						</button>
+						<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+							<p>yesterday min temperature {{request.user.the_building.yesterday_min}}</p>
+							<p>yesterday max temperature {{request.user.the_building.yesterday_max}}</p>
+							<p>day before yesterday min temperature {{request.user.the_building.db_yesterday_min}}</p>
+							<p>day before yesterday max temperature {{request.user.the_building.db_yesterday_max}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+
+		{% if request.user.is_staff %}
+			<br><br>
+			<div class="col-md-5">
+				<!-- <h5>RESIDENTS:</h5> -->
+				<hr>
+				<div class="card card-body">
+					<a class="btn btn-primary  btn-sm btn-block" href="">Register Resident</a>
+					<table class="table table-sm">
+						<tr>
+							<th></th>
+							<th>USERNAME</th>
+							<th>EMAIL</th>
+							<th>BUILDING</th>
 		
-		{% if request.user.is_admin %}
-		<a class="link" href="{% url 'admin_page' %}">admin</a>
-		<a class="link" href="{% url 'all_users' %}">USERS</a>
-		<a class="link" href="{% url 'all_buildings' %}">BUILDINGS</a>
-		{% endif %}
-	</div>
-
-
-	<em class="welcome">
-		<br>
-		<p>hello, {{request.user.username}}. How u doing?..</p>
-		<h2>Thanks for logging in to our website...</h2>
-	</em>
-
-	{% if not request.user.is_staff %}
-	<div class="warning">
-		{% if request.user.the_building.temp_too_low %}
-		<p>Currently temperature in your apartment is very low</p>
-		{% endif %}
-		{% if request.user.the_building.temp_too_high %}
-		<p>Currently temperature in your apartment is very high</p>
-		{% endif %}
-	</div>
-
-	<div class="building_temp_info">
-		<p>Your building name {{request.user.the_building.building_name}}</p>
-		<p>Building coordinates {{request.user.the_building.latitude}}°N, {{request.user.the_building.longitude}}°E</p>
-	</div>
-
-	<div class="building_temp_info">
-		<h2 style="color: aqua;">Current Temperature</h2>
-		<p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p>
-		<p>Current minimum temperature of your building surroundings {{request.user.the_building.min_temp}}°C</p>
-		<p>Current maximum temperature of your building surroundings {{request.user.the_building.max_temp}}°C</p>
-	</div>
-
-	<div style="text-align: center;">
-		<div style="text-align: center; margin-top: 10px; font-family: monospace; ">
-			<div class="dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					Extreme Temperatures in Past 30 Days
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<p>min temperature {{request.user.the_building.till_now_min}}</p>
-					<p>max temperature {{request.user.the_building.till_now_max}}</p>
+							{% for resident in residents%}
+								<tr>
+									<td></td>
+									<td>{{resident.username}}</td>
+									<td>{{resident.email}}</td>
+									<td>{{resident.the_building.building_name}}</td>
+									<td><a class="btn btn-sm btn-info" href="{% url 'resident_details' resident.username %}">view</a></td>
+								</tr>
+							{% endfor %}
+						</tr>
+		
+					</table>
 				</div>
 			</div>
+		{% endif %}
+
+		<!-- make sure that for any hyperlink/ image u use the static rules -->
+
+		<!-- <a href="{% anchor 'mainHome' '' %}"><img class="goTop_img" src="{% static 'goTop.jpg' %}" alt=""></a> -->
+
+		{% else %}
+		<!-- if the user is not logged in ask him to either register or login, -->
+		<h2 class="logReg_info">It looks like you are not logged in.<br>
+			Are you new to this website?<br>
+			If yes, mind <a href="{% url 'register' %}"
+				style="font-style: italic; color: rgb(255, 255, 255);">register</a>ing urself to our super website?<br>
+			If not, come <a href="{% url 'login' %}" style="font-style: italic; color: rgb(255, 255, 255);">login</a> to ur
+			page.</h2>
+		<!-- If not, come <a href="{% url 'get_building' %}" style="font-style: italic; color: rgb(20, 247, 198);">login</a> to ur page.</h2> -->
+		<div class="back">
+			<a href="{% url 'home' %}" style="font-style: italic; color: rgb(255, 255, 255);">Back to home</a>
 		</div>
-		<div style="text-align: center; margin-top: 10px; font-family: monospace ; ">
-			<div class="dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">
-					Extreme Temperatures of Past Two Days
-				</button>
-				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<p>yesterday min temperature {{request.user.the_building.yesterday_min}}</p>
-					<p>yesterday max temperature {{request.user.the_building.yesterday_max}}</p>
-					<p>day before yesterday min temperature {{request.user.the_building.db_yesterday_min}}</p>
-					<p>day before yesterday max temperature {{request.user.the_building.db_yesterday_max}}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-	{% endif %}
-
-	<!-- make sure that for any hyperlink/ image u use the static rules -->
-
-	<!-- <a href="{% anchor 'mainHome' '' %}"><img class="goTop_img" src="{% static 'goTop.jpg' %}" alt=""></a> -->
-
-	{% else %}
-	<!-- if the user is not logged in ask him to either register or login, -->
-	<h2 class="logReg_info">It looks like you are not logged in.<br>
-		Are you new to this website?<br>
-		If yes, mind <a href="{% url 'register' %}"
-			style="font-style: italic; color: rgb(255, 255, 255);">register</a>ing urself to our super website?<br>
-		If not, come <a href="{% url 'login' %}" style="font-style: italic; color: rgb(255, 255, 255);">login</a> to ur
-		page.</h2>
-	<!-- If not, come <a href="{% url 'get_building' %}" style="font-style: italic; color: rgb(20, 247, 198);">login</a> to ur page.</h2> -->
-	<div class="back">
-		<a href="{% url 'home' %}" style="font-style: italic; color: rgb(255, 255, 255);">Back to home</a>
-	</div>
 	{% endif %}
 
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
