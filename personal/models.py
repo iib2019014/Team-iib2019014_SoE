@@ -63,9 +63,13 @@ class Building(models.Model) :
     min_temp = models.FloatField(null =True)
     temp_too_low = models.BooleanField(default = False)
     temp_too_high = models.BooleanField(default = False)
-    the_yesterday_temp = Temperature_object()
-    the_db_yesterday_temp = Temperature_object()
     # today_temp = Temperature_object()
+    # yesterday_temp = Temperature_object()
+    # db_yesterday_temp = Temperature_object()
+    yesterday_min = models.FloatField(null =True)
+    yesterday_max = models.FloatField(null =True)
+    db_yesterday_min = models.FloatField(null =True)
+    db_yesterday_max = models.FloatField(null =True)
     
 
     USERNAME_FIELD  = 'building_id'
@@ -84,65 +88,3 @@ class Building(models.Model) :
 
     def __str__(self) :
         return  self.building_id
-
-    def update_temperature(self) :
-        # print("updating time : " + str(datetime.now().strftime("%H:%M:%S")))
-        name_url = 'http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'
-        city_latitude = self.latitude
-        city_longitude = self.longitude
-
-        r = requests.get(name_url.format(city_latitude, city_longitude)).json()
-
-        self.current_temp = r['main']['temp']
-        # self.current_temp = 6
-        # self.current_temp = 44
-        if(self.current_temp < WARN_MIN) :
-            self.temp_too_low = True
-        else :
-            self.temp_too_low = False
-
-        if(self.current_temp > WARN_MAX) :
-            self.temp_too_high = True
-        else :
-            self.temp_too_high = False
-
-        min = r['main']['temp_min']
-        # # print(str(min - 11.09))
-        # print("before min " + str(min))
-        if(self.min_temp > min) :
-            self.min_temp = r['main']['temp_min']
-        # print("after min " + str(min))
-
-        max = r['main']['temp_max']
-        # print("before max " + str(max))
-        if(self.max_temp < max) :
-            self.max_temp = r['main']['temp_max']
-        # print("after max " + str(max))
-
-        today = date.today()
-
-        # yesterday_temp = Temperature_object()
-        yesterday = today - timedelta(days = 1)
-        # yesterday_temp.date = yesterday
-        # yesterday_temp.min_temp = 27.74
-        # yesterday_temp.max_temp = 29.07
-        # yesterday_temp.save()
-
-        # # Temperature_object.objects.get(date=yesterday).min_temp = 27.74
-        # # Temperature_object.objects.get(date=yesterday).max_temp = 29.07
-        # # Temperature_object.objects.get(date=yesterday).save()
-
-        # self.the_yesterday_temp = Temperature_object.objects.get(date=yesterday)
-
-        # db_yesterday_temp = Temperature_object()
-        db_yesterday = today - timedelta(days = 2)
-        # db_yesterday_temp.date = db_yesterday
-        # db_yesterday_temp.min_temp = 27.57
-        # db_yesterday_temp.max_temp = 28.17
-        # db_yesterday_temp.save()
-
-        # self.the_db_yesterday_temp = Temperature_object.objects.get(date=db_yesterday)
-
-        # # Temperature_object.objects.get(date=db_yesterday).min_temp = 27.57
-        # # Temperature_object.objects.get(date=db_yesterday).max_temp = 28.17
-        # # Temperature_object.objects.get(date=db_yesterday).save()

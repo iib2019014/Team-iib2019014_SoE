@@ -24,4 +24,4 @@ class BuildingRequestForm(ModelForm):
 class BuildingForm(ModelForm) :
     class Meta :
         model = Building
-        fields = ['building_name', 'building_id', 'owner_name', 'longitude', 'latitude']
+        fields = ['building_name', 'building_id', 'owner_name', 'longitude', 'latitude', 'yesterday_min', 'yesterday_max', 'db_yesterday_min', 'db_yesterday_max']

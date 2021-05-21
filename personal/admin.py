@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Building
+from .models import Building, Temperature_object
 from .forms import BuildingForm
 
 # Register your models here.
@@ -22,4 +22,4 @@ class BuildingAdmin(admin.ModelAdmin) :
 
 admin.site.register(Building, BuildingAdmin)
 
-
+# admin.site.register(Temperature_object)

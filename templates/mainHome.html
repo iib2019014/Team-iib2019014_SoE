@@ -49,8 +49,6 @@
 	<div class="building_temp_info">
 		<p>Your building name {{request.user.the_building.building_name}}</p>
 		<p>Building coordinates {{request.user.the_building.latitude}}°N, {{request.user.the_building.longitude}}°E</p>
-		<!-- <p>Current temperature of your building surroundings {{request.user.the_building.current_temp}}°C</p> -->
-		<!-- <p>yester min temp {{request.user.the_building.the_yesterday_temp.min_temp}}</p> -->
 	</div>
 
 	<div class="building_temp_info">
@@ -60,17 +58,17 @@
 		<p>Current maximum temperature of your building surroundings {{request.user.the_building.max_temp}}°C</p>
 	</div>
 
-	<div style="text-align: center; margin-top: 10px;">
+	<div style="text-align: center; margin-top: 10px; font-family: monospace;">
 		<div class="dropdown">
 			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
 				aria-haspopup="true" aria-expanded="false">
 				Extreme Temperatures of Past Two Days
 			</button>
 			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<p>yesterday min temperature {{request.user.the_building.the_yesterday_temp.min_temp}}</p>
-				<p>yesterday max temperature {{request.user.the_building.the_yesterday_temp.max_temp}}</p>
-				<p>day before yesterday min temperature {{request.user.the_building.the_db_yesterday_temp.min_temp}}</p>
-				<p>day before yesterday max temperature {{request.user.the_building.the_db_yesterday_temp.max_temp}}</p>
+				<p>yesterday min temperature {{request.user.the_building.yesterday_min}}</p>
+				<p>yesterday max temperature {{request.user.the_building.yesterday_max}}</p>
+				<p>day before yesterday min temperature {{request.user.the_building.db_yesterday_min}}</p>
+				<p>day before yesterday max temperature {{request.user.the_building.db_yesterday_max}}</p>
 			</div>
 		</div>
 	</div>
