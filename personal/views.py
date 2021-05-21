@@ -2,14 +2,9 @@ from django.shortcuts import render
 
 import requests # for getting the response for the url,
 
-from datetime import datetime, date, timedelta
-
 from .forms import NameRequestForm, CoordRequestForm, BuildingRequestForm
 from .models import(
-    Temperature_object,
     Building,
-    WARN_MAX,
-    WARN_MIN,
 )
 
 # Create your views here.
@@ -144,36 +139,4 @@ def ask_building_view(request) :
 
 def update_temperature(building_id) :
     the_building = Building.objects.get(building_id=building_id)
-
-    name_url = 'http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'
-    city_latitude = the_building.latitude
-    city_longitude = the_building.longitude
-
-    r = requests.get(name_url.format(city_latitude, city_longitude)).json()
-
-    the_building.current_temp = r['main']['temp']
-    # the_building.current_temp = 6
-    # the_building.current_temp = 44
-    if(the_building.current_temp < WARN_MIN) :
-        the_building.temp_too_low = True
-    else :
-        the_building.temp_too_low = False
-
-    if(the_building.current_temp > WARN_MAX) :
-        the_building.temp_too_high = True
-    else :
-        the_building.temp_too_high = False
-
-    min = r['main']['temp_min']
-    if(min < the_building.min_temp) :
-        the_building.today_temp.min_temp = the_building.min_temp = r['main']['temp_min']
-
-    max = r['main']['temp_max']
-    if(max > the_building.max_temp) :
-        the_building.today_temp.max_temp = the_building.max_temp = r['main']['temp_max']
-    
-    today = date.today()
-    yesterday = today - timedelta(days = 1)
-    db_yesterday = today - timedelta(days = 2)
-    
     the_building.save()

@@ -59,17 +59,17 @@ class Building(models.Model) :
     latitude = models.CharField(max_length=25, null =True)
     building_city = models.CharField(max_length=30, null =True)
     current_temp = models.FloatField(null =True)
+    till_now_min = models.FloatField(null =True)
+    till_now_max = models.FloatField(null =True)
     max_temp = models.FloatField(null =True)
     min_temp = models.FloatField(null =True)
     temp_too_low = models.BooleanField(default = False)
     temp_too_high = models.BooleanField(default = False)
-    # today_temp = Temperature_object()
-    # yesterday_temp = Temperature_object()
-    # db_yesterday_temp = Temperature_object()
     yesterday_min = models.FloatField(null =True)
     yesterday_max = models.FloatField(null =True)
     db_yesterday_min = models.FloatField(null =True)
     db_yesterday_max = models.FloatField(null =True)
+    last_update_date = models.DateField(null =True)
     
 
     USERNAME_FIELD  = 'building_id'
@@ -78,10 +78,45 @@ class Building(models.Model) :
         api_url = 'http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'
         r = requests.get(api_url.format(self.latitude, self.longitude)).json()
 
-        self.building_city = r['name']
+        # print(self.last_update_date)
+        if(self.last_update_date == None) :
+            self.last_update_date = 
+
+        if(self.building_city == None) :
+            self.building_city = r['name']
+        
         self.current_temp = r['main']['temp']
-        self.max_temp = r['main']['temp_max']
-        self.min_temp = r['main']['temp_min']
+        # self.current_temp = 31.24
+        if(self.current_temp < WARN_MIN) :
+            self.temp_too_low = True
+        else :
+            self.temp_too_low = False
+
+        if(self.current_temp > WARN_MAX) :
+            self.temp_too_high = True
+        else :
+            self.temp_too_high = False
+
+        if(self.max_temp == None) :
+            self.max_temp = r['main']['temp_max']
+            self.till_now_max = self.max_temp
+        else :
+            if(self.current_temp > self.max_temp) :
+                self.max_temp = self.current_temp
+                if(self.max_temp > self.till_now_max) :
+                    self.till_now_max = self.max_temp
+        print("max : " + str(self.max_temp))
+
+        if(self.min_temp) :
+            self.min_temp = r['main']['temp_min']
+            self.till_now_min = self.min_temp
+        else :
+            if(self.current_temp < self.min_temp) :
+                self.min_temp = self.current_temp
+                if(self.min_temp < self.till_now_min) :
+                    self.till_now_min = self.min_temp
+        print("min : " + str(self.min_temp))
+        
 
         # save the building model using the save method of super(),
         super().save(*args, **kwargs)

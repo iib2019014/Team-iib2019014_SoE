@@ -58,17 +58,31 @@
 		<p>Current maximum temperature of your building surroundings {{request.user.the_building.max_temp}}°C</p>
 	</div>
 
-	<div style="text-align: center; margin-top: 10px; font-family: monospace;">
-		<div class="dropdown">
-			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-				aria-haspopup="true" aria-expanded="false">
-				Extreme Temperatures of Past Two Days
-			</button>
-			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-				<p>yesterday min temperature {{request.user.the_building.yesterday_min}}</p>
-				<p>yesterday max temperature {{request.user.the_building.yesterday_max}}</p>
-				<p>day before yesterday min temperature {{request.user.the_building.db_yesterday_min}}</p>
-				<p>day before yesterday max temperature {{request.user.the_building.db_yesterday_max}}</p>
+	<div style="text-align: center;">
+		<div style="text-align: center; margin-top: 10px; font-family: monospace; ">
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					Extreme Temperatures in Past 30 Days
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<p>min temperature {{request.user.the_building.till_now_min}}</p>
+					<p>max temperature {{request.user.the_building.till_now_max}}</p>
+				</div>
+			</div>
+		</div>
+		<div style="text-align: center; margin-top: 10px; font-family: monospace ; ">
+			<div class="dropdown">
+				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false">
+					Extreme Temperatures of Past Two Days
+				</button>
+				<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<p>yesterday min temperature {{request.user.the_building.yesterday_min}}</p>
+					<p>yesterday max temperature {{request.user.the_building.yesterday_max}}</p>
+					<p>day before yesterday min temperature {{request.user.the_building.db_yesterday_min}}</p>
+					<p>day before yesterday max temperature {{request.user.the_building.db_yesterday_max}}</p>
+				</div>
 			</div>
 		</div>
 	</div>
