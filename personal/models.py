@@ -78,15 +78,31 @@ class Building(models.Model) :
         api_url = 'http://api.openweathermap.org/data/2.5/weather?lat={}&lon={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'
         r = requests.get(api_url.format(self.latitude, self.longitude)).json()
 
-        # print(self.last_update_date)
+        today = date.today()
+        yesterday = today - timedelta(days = 1)
         if(self.last_update_date == None) :
-            self.last_update_date = 
+            self.last_update_date = today
+        else :
+            if(self.last_update_date == yesterday) :
+                print("last update was yesterday")
+                print("dy min : " + str(self.db_yesterday_min))
+                self.db_yesterday_min = self.yesterday_min
+                print("dy min after : " + str(self.db_yesterday_min))
+                print("dy max : " + str(self.db_yesterday_max))
+                self.db_yesterday_max = self.yesterday_max
+                print("dy max after : " + str(self.db_yesterday_max))
+                print("y min : " + str(self.yesterday_min))
+                self.yesterday_min = self.min_temp
+                print("y min after : " + str(self.yesterday_min))
+                print("y max : " + str(self.yesterday_max))
+                self.yesterday_max = self.max_temp
+                print("y max after : " + str(self.yesterday_max))
+        self.last_update_date = today
 
         if(self.building_city == None) :
             self.building_city = r['name']
         
         self.current_temp = r['main']['temp']
-        # self.current_temp = 31.24
         if(self.current_temp < WARN_MIN) :
             self.temp_too_low = True
         else :
