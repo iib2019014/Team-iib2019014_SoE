@@ -123,7 +123,7 @@ class Building(models.Model) :
                     self.till_now_max = self.max_temp
         print("max : " + str(self.max_temp))
 
-        if(self.min_temp) :
+        if(self.min_temp == None) :
             self.min_temp = r['main']['temp_min']
             self.till_now_min = self.min_temp
         else :
