@@ -27,7 +27,7 @@ class AccountManager(BaseUserManager) :
                 # the_building = personal.models.Building.objects.get(building_id=building_id)
             )
 
-            user.the_building = personal.models.Building.objects.get(building_id=building_id)
+            # user.the_building = personal.models.Building.objects.get(building_id=building_id)
             print("after yes")
 
             # user.set_password("123456")

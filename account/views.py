@@ -43,12 +43,18 @@ def UserRegistration_view(request) :
 			raw_password = form.cleaned_data.get('password1')			
 
 			account = authenticate(email = email, password = raw_password)
-			login(request, account)
-			
-			request.user.the_building = Building_model.objects.get(building_id=request.POST.get('building_id'))
-			print(request.user.the_building)
-			request.user.save()		# required for saving the 'the_building' for the 'user',
-			
+			print("user is " + str(request.user))
+			if(not(request.user.is_staff)) :
+				login(request, account)
+				request.user.the_building = Building_model.objects.get(building_id=request.POST.get('building_id'))
+				print(request.user.the_building)
+				request.user.save()		# required for saving the 'the_building' for the 'user',
+			else :
+				username = request.POST.get('username')
+				the_account = Account.objects.get(username=username)
+				the_account.the_building = Building_model.objects.get(building_id=request.POST.get('building_id'))
+				print(the_account.the_building)
+				the_account.save()
 
 			return redirect('mainHome')
 

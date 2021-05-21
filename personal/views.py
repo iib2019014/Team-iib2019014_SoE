@@ -5,7 +5,13 @@ import requests # for getting the response for the url,
 from account.models import Account
 from account.forms import AccountUpdationForm
 
-from .forms import NameRequestForm, CoordRequestForm, BuildingRequestForm, BuildingForm
+from .forms import(
+    NameRequestForm,
+    CoordRequestForm,
+    BuildingRequestForm,
+    BuildingUpdateForm,
+    BuildingForm,
+)
 from .models import(
     Building,
 )
@@ -33,6 +39,9 @@ def mainHome_page_view(request) :
     residents = Account.objects.all()
     context = {}
     context['residents'] = residents
+
+    buildings = Building.objects.all()
+    context['buildings'] = buildings
     return render(request, 'mainHome.html', context)
 
 def resident_detail_view(request, username) :
@@ -51,11 +60,11 @@ def resident_detail_view(request, username) :
 
 def building_detail_view(request, building_id) :
     building = Building.objects.get(building_id=building_id)
-    form = BuildingForm(instance=building_id)
+    form = BuildingUpdateForm(instance=building)
     context = {}
 
     if request.method == 'POST': 
-        form = BuildingForm(request.POST, instance=building_id)
+        form = BuildingUpdateForm(request.POST, instance=building)
         if form.is_valid() :
             form.save()
             return redirect('mainHome')
@@ -63,24 +72,17 @@ def building_detail_view(request, building_id) :
     context['building_form'] = form
     return render(request, 'personal/building_details.html', context)
 
-# def building_detail_view(request, building_id) :
-#     building = Building.objects.get(building_id=building_id)
-#     context = {}
-#     if request.POST :
-#         form = AccountUpdationForm(request.POST, instance = request.user)
-#         if form.is_valid() :
-#             form.save()
-
-#     else :
-#         form = AccountUpdationForm(
-#             initial = {
-#                 "email" : resident.email,
-#                 "username" : resident.username,
-#             }
-#         )
-        
-#     context['account_form'] = form
-#     return render(request, 'personal/resident_details.html', context)
+def add_building_view(request) :
+    context = {}
+    if request.method == 'POST': 
+        form = BuildingForm(request.POST)
+        if form.is_valid() :
+            form.save()
+            return redirect('mainHome')
+    else :
+        form = BuildingForm()
+    context['building_form'] = form
+    return render(request, 'personal/add_building.html', context)
 
 def weather_view(request) :
     name_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'

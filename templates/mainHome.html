@@ -90,30 +90,54 @@
 
 		{% if request.user.is_staff %}
 			<br><br>
-			<div class="col-md-5">
-				<!-- <h5>RESIDENTS:</h5> -->
-				<hr>
-				<div class="card card-body">
-					<a class="btn btn-primary  btn-sm btn-block" href="">Register Resident</a>
-					<table class="table table-sm">
-						<tr>
-							<th></th>
-							<th>USERNAME</th>
-							<th>EMAIL</th>
-							<th>BUILDING</th>
-		
-							{% for resident in residents%}
-								<tr>
-									<td></td>
-									<td>{{resident.username}}</td>
-									<td>{{resident.email}}</td>
-									<td>{{resident.the_building.building_name}}</td>
-									<td><a class="btn btn-sm btn-info" href="{% url 'resident_details' resident.username %}">view</a></td>
-								</tr>
-							{% endfor %}
-						</tr>
-		
-					</table>
+			<div class="row" style="font-family: monospace;">
+				<div class="col-md-5">
+					<!-- <h5>RESIDENTS:</h5> -->
+					<hr>
+					<div class="card card-body">
+						<a class="btn btn-primary  btn-sm btn-block" href="{% url 'register' %}">REGISTER RESIDENT</a>
+						<table class="table table-sm" style="font-size: 15px;">
+							<tr>
+								<th></th>
+								<th>USERNAME</th>
+								<th>EMAIL</th>
+								<th>BUILDING</th>
+								{% for resident in residents %}
+									<tr>
+										<td></td>
+										<td>{{resident.username}}</td>
+										<td>{{resident.email}}</td>
+										<td>{{resident.the_building.building_name}}</td>
+										<td><a class="btn btn-sm btn-info" href="{% url 'resident_details' resident.username %}">view</a></td>
+									</tr>
+								{% endfor %}
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<!-- <h5>RESIDENTS:</h5> -->
+					<hr>
+					<div class="card card-body">
+						<a class="btn btn-primary  btn-sm btn-block" href="{% url 'add_building' %}">ADD BUILDING</a>
+						<table class="table table-sm" style="font-size: 15px;">
+							<tr>
+								<th></th>
+								<th>BUILDING NAME</th>
+								<th>BUILDING ID</th>
+								<th>BUILDING OWNER</th>
+								{% for building in buildings %}
+									<tr>
+										<td></td>
+										<td>{{building.building_name}}</td>
+										<td>{{building.building_id}}</td>
+										<td>{{building.owner_name}}</td>
+										<td><a class="btn btn-sm btn-info" href="{% url 'building_details' building.building_id %}">view</a></td>
+									</tr>
+								{% endfor %}
+							</tr>
+						</table>
+					</div>
 				</div>
 			</div>
 		{% endif %}
@@ -129,8 +153,6 @@
 			If yes, mind <a href="{% url 'register' %}"
 				style="font-style: italic; color: rgb(255, 255, 255);">register</a>ing urself to our super website?<br>
 			If not, come <a href="{% url 'login' %}" style="font-style: italic; color: rgb(255, 255, 255);">login</a> to ur
-			page.</h2>
-		<!-- If not, come <a href="{% url 'get_building' %}" style="font-style: italic; color: rgb(20, 247, 198);">login</a> to ur page.</h2> -->
 		<div class="back">
 			<a href="{% url 'home' %}" style="font-style: italic; color: rgb(255, 255, 255);">Back to home</a>
 		</div>

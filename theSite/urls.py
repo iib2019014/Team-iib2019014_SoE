@@ -30,6 +30,7 @@ from personal.views import (
 
     resident_detail_view,
     building_detail_view,
+    add_building_view,
 )
 
 from account.views import (
@@ -106,7 +107,7 @@ urlpatterns = [
 
     path('weather_info_2', weather_view_2, name = "weather_info_2"),
 
-    path('get_building', ask_building_view, name = "get_building"),
+    # path('get_building', ask_building_view, name = "get_building"),
 
     path('mainHome/our_users', all_users_view, name = "all_users"),
 
@@ -114,7 +115,8 @@ urlpatterns = [
 
 
     path('resident_details/<str:username>/', resident_detail_view, name='resident_details'),
-    path('building_details/<str:username>/', building_detail_view, name='building_details'),
+    path('building_details/<str:building_id>/', building_detail_view, name='building_details'),
+    path('add_building/', add_building_view, name='add_building'),
 ]
 
 

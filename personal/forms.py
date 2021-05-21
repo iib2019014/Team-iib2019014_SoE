@@ -1,4 +1,4 @@
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, forms
 from .models import NameRequest, CoordRequest, BuildingRequest, Building
 
 class NameRequestForm(ModelForm):
@@ -25,3 +25,11 @@ class BuildingForm(ModelForm) :
     class Meta :
         model = Building
         fields = ['building_name', 'building_id', 'owner_name', 'longitude', 'latitude', 'yesterday_min', 'yesterday_max', 'db_yesterday_min', 'db_yesterday_max']
+        widgets = { 'building_name' : TextInput(attrs={'class' : 'input', 'placeholder' : 'Building Name'}),
+                    'building_id' : TextInput(attrs={'class' : 'input', 'placeholder' : 'Place latitude'})
+                    }
+
+class BuildingUpdateForm(ModelForm) :
+    class Meta :
+        model = Building
+        fields = ['building_name', 'building_id', 'owner_name']
