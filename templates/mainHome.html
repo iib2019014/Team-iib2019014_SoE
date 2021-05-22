@@ -119,7 +119,7 @@
 										<td>{{resident.is_staff}}</td>
 										<td>{{resident.is_active}}</td>
 										<td><a class="btn btn-sm btn-info" href="{% url 'resident_details' resident.username %}">view</a></td>
-										<td><a class="btn btn-sm btn-danger" href="{% url 'remove_resident' resident.username %}">remove</a></td>Remove</a></td>
+										<td><a class="btn btn-sm btn-danger" href="{% url 'remove_resident' resident.username %}">remove</a></td>
 									</tr>
 								{% endfor %}
 							</tr>
