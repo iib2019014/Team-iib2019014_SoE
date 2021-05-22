@@ -26,11 +26,11 @@ from personal.views import (
     weather_view,
     weather_view_2,
 
-    ask_building_view,
-
     resident_detail_view,
     building_detail_view,
     add_building_view,
+
+    remove_resident_view,
 )
 
 from account.views import (
@@ -42,8 +42,6 @@ from account.views import (
 
     all_users_view,
     all_buildings_view,
-
-    # device_list_view,
 )
 
 
@@ -101,13 +99,9 @@ urlpatterns = [
     path('mainHome/reset/done/', auth_views.PasswordResetCompleteView.as_view(template_name='registration/password_reset_complete.html'),
      name='password_reset_complete'),
 
-    # path('mainHome/your_devices', device_list_view.as_view(), name = "devices"),
-
     path('weather_info', weather_view, name = "weather_info"),
 
     path('weather_info_2', weather_view_2, name = "weather_info_2"),
-
-    # path('get_building', ask_building_view, name = "get_building"),
 
     path('mainHome/our_users', all_users_view, name = "all_users"),
 
@@ -117,6 +111,8 @@ urlpatterns = [
     path('resident_details/<str:username>/', resident_detail_view, name='resident_details'),
     path('building_details/<str:building_id>/', building_detail_view, name='building_details'),
     path('add_building/', add_building_view, name='add_building'),
+    
+    path('remove_resident/<str:username>/', remove_resident_view, name='remove_resident'),
 ]
 
 

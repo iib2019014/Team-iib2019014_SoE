@@ -84,6 +84,12 @@ def add_building_view(request) :
     context['building_form'] = form
     return render(request, 'personal/add_building.html', context)
 
+def remove_resident_view(request, username) :
+    resident = Account.objects.get(username=username)
+    context = {}
+    context['resident'] = resident
+    return render(request, 'personal/remove_resident.html', context)
+
 def weather_view(request) :
     name_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'
     # the_name = 'Nellore'
@@ -169,29 +175,6 @@ def weather_view_2(request) :
 
         return render(request, 'personal/get_coords.html', context)
 
-
-
-def ask_building_view(request) :
-    context = {}
-
-    if request.POST :
-        print("if")
-        request_form = BuildingRequestForm(request.POST)
-
-        if request_form.is_valid() :
-            print("ifif")
-            request_form.save()
-            building_id = request.POST.get('building_id')
-
-        # return render(request, 'personal/', context)
-
-    else :
-        print("else")
-        request_form = BuildingRequestForm()
-
-        context['request_form'] = request_form
-
-        return render(request, 'personal/get_building.html', context)
 
 def update_temperature(building_id) :
     the_building = Building.objects.get(building_id=building_id)
