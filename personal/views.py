@@ -87,6 +87,10 @@ def add_building_view(request) :
 def remove_resident_view(request, username) :
     resident = Account.objects.get(username=username)
     context = {}
+
+    if request.POST :
+        resident.delete()
+        return redirect('mainHome')
     context['resident'] = resident
     return render(request, 'personal/remove_resident.html', context)
 
