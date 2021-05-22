@@ -19,11 +19,11 @@
 					<a href="{% url 'weather_info_2' %}">Coordinates</a>
 				</div>
 			</div>
-			<a class="link" href="{% url 'logout' %}">Logout</a>
 			<a class="link" href="{% url 'My Profile' %}">My Profile</a>
+			<a class="link" href="{% url 'logout' %}">Logout</a>
 			
 			{% if request.user.is_admin %}
-				<a class="link" href="{% url 'admin_page' %}">admin</a>
+				<!-- <a class="link" href="{% url 'admin_page' %}">admin</a> -->
 			{% endif %}
 		</div>
 
@@ -94,7 +94,7 @@
 					<hr>
 					<div class="card card-body">
 						<a class="btn btn-primary  btn-sm btn-block" href="{% url 'register' %}">REGISTER RESIDENT</a>
-						<table class="table table-sm" style="font-size: 15px;">
+						<table class="table table-success table-striped" style="font-size: 15px;">
 							<tr>
 								<th></th>
 								<th>USERNAME</th>
@@ -118,20 +118,20 @@
 										<td>{{resident.last_login}}</td>
 										<td>{{resident.is_staff}}</td>
 										<td>{{resident.is_active}}</td>
-										<td><a class="btn btn-sm btn-info" href="{% url 'resident_details' resident.username %}">view</a></td>
-										<td><a class="btn btn-sm btn-danger" href="{% url 'remove_resident' resident.username %}">remove</a></td>
+										<td><a class="btn btn-sm btn-outline-info" href="{% url 'resident_details' resident.username %}">view</a></td>
+										<td><a class="btn btn-sm btn-outline-danger" href="{% url 'remove_resident' resident.username %}">remove</a></td>
 									</tr>
 								{% endfor %}
 							</tr>
 						</table>
 					</div>
 				</div>
-				<div class="col-md-5">
+				<div class="col-md-10">
 					<!-- <h5>RESIDENTS:</h5> -->
 					<hr>
 					<div class="card card-body">
 						<a class="btn btn-primary  btn-sm btn-block" href="{% url 'add_building' %}">ADD BUILDING</a>
-						<table class="table table-sm" style="font-size: 15px;">
+						<table class="table table-success table-striped" style="font-size: 15px;">
 							<tr>
 								<th></th>
 								<th>BUILDING NAME</th>
@@ -145,8 +145,8 @@
 										<td>{{building.building_id}}</td>
 										<td>{{building.owner_name}}</td>
 										<td>{{building.building_city}}</td>
-										<td><a class="btn btn-sm btn-info" href="{% url 'building_details' building.building_id %}">view</a></td>
-										<td><a class="btn btn-sm btn-danger" href="{% url 'remove_building' building.building_id %}">Remove</a></td>
+										<td><a class="btn btn-sm btn-outline-info" href="{% url 'building_details' building.building_id %}">view</a></td>
+										<td><a class="btn btn-sm btn-outline-danger" href="{% url 'remove_building' building.building_id %}">Remove</a></td>
 									</tr>
 								{% endfor %}
 							</tr>

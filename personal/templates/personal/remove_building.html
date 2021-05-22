@@ -31,8 +31,8 @@
     <div class="form">
         <form method="post" action="">{% csrf_token %}
             <p class="msg">Are you sure you want to delete {{building.building_name}} ?</p>
-            <a class="btn btn-sm btn-info" href="{% url 'mainHome' %}">CANCEL</a>
-            <input class="btn btn-sm btn-danger" type="submit" value="DELETE">
+            <a class="btn btn-sm btn-outline-primary" href="{% url 'mainHome' %}">CANCEL</a>
+            <input class="btn btn-sm btn-outline-danger" type="submit" value="DELETE">
         </form>
     </div>
 {% endblock %}
