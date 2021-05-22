@@ -29,20 +29,9 @@
         box-shadow:0 0 15px 4px rgba(0,0,0,0.15);
     }
 
-    form input[name='email'] {
+    form input {
         width: 25%;
-        background-color: #ffffff;
-        color: rgb(0, 0, 0);
-        padding: 14px 20px;
-        margin: 8px 0;
-        border: none;
-        border-radius: 15px;
-        box-shadow:0 0 15px 4px rgba(0, 0, 0, 0.15);
-        /* cursor: pointer; */
-    }
-
-    form input[name='password'] {
-        width: 25%;
+        height: 40px;
         background-color: #ffffff;
         color: rgb(0, 0, 0);
         padding: 14px 20px;
@@ -55,16 +44,16 @@
 
     .form {
         margin-left: 250px;
-        margin-top: 200px;
+        margin-top: 50px;
         border: 10px solid white;
         border-radius: 30px;
-        height: 300px;
+        height: 780px;
         width: 1200px;
         position: absolute;
     }
 </style>
 <div class="form">
-    <h2 class="head">Login</h2>
+    <h2 class="head">ADD BUILDING</h2>
     <form method="post" style="text-align: center;">{% csrf_token %}
         {% for field in building_form %}
         <p>
@@ -82,7 +71,7 @@
     
     
     
-        <button type="submit" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); margin-right: 10px; border-radius: 5px; width:100px">SIGN IN</button> <!-- when button clicked, execute submit and run post method -->
+        <button type="submit" style="color: rgb(0, 0, 0); background-color: rgb(255, 255, 255); margin-right: 10px; border-radius: 5px; width:100px">ADD</button> <!-- when button clicked, execute submit and run post method -->
     
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"
             integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi"

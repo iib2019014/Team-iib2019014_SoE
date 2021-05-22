@@ -24,8 +24,6 @@
 			
 			{% if request.user.is_admin %}
 				<a class="link" href="{% url 'admin_page' %}">admin</a>
-				<a class="link" href="{% url 'all_users' %}">USERS</a>
-				<a class="link" href="{% url 'all_buildings' %}">BUILDINGS</a>
 			{% endif %}
 		</div>
 
@@ -91,7 +89,7 @@
 		{% if request.user.is_staff %}
 			<br><br>
 			<div class="row" style="font-family: monospace;">
-				<div class="col-md-5">
+				<div class="col-md-10">
 					<!-- <h5>RESIDENTS:</h5> -->
 					<hr>
 					<div class="card card-body">
@@ -102,12 +100,24 @@
 								<th>USERNAME</th>
 								<th>EMAIL</th>
 								<th>BUILDING</th>
+								<th>LAST LOGIN</th>
+								<th>DATE JOINED</th>
+								<th>IS ADMIN</th>
+								<th>IS ACTIVE</th>
 								{% for resident in residents %}
 									<tr>
 										<td></td>
 										<td>{{resident.username}}</td>
 										<td>{{resident.email}}</td>
-										<td>{{resident.the_building.building_name}}</td>
+										{% if resident.is_staff %}
+											<td>-------</td>
+										{% else %}
+											<td>{{resident.the_building.building_name}}</td>
+										{% endif %}
+										<td>{{resident.date_joined}}</td>
+										<td>{{resident.last_login}}</td>
+										<td>{{resident.is_staff}}</td>
+										<td>{{resident.is_active}}</td>
 										<td><a class="btn btn-sm btn-info" href="{% url 'resident_details' resident.username %}">view</a></td>
 									</tr>
 								{% endfor %}
@@ -126,12 +136,14 @@
 								<th>BUILDING NAME</th>
 								<th>BUILDING ID</th>
 								<th>BUILDING OWNER</th>
+								<th>BUILDING CITY</th>
 								{% for building in buildings %}
 									<tr>
 										<td></td>
 										<td>{{building.building_name}}</td>
 										<td>{{building.building_id}}</td>
 										<td>{{building.owner_name}}</td>
+										<td>{{building.building_city}}</td>
 										<td><a class="btn btn-sm btn-info" href="{% url 'building_details' building.building_id %}">view</a></td>
 									</tr>
 								{% endfor %}
