@@ -1,0 +1,7 @@
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        Are you sure you want to delete {{building.building_name}} ?
+        <a href="{% url 'mainHome' %}">CANCEL</a>
+        <input type="submit" value="DELETE">
+    </form>
+{% endblock %}

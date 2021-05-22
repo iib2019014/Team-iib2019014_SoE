@@ -20,6 +20,7 @@ from personal.views import (
     home_page_view,
     home_body_view,
     about_page_view,
+    remove_building_view,
     wrong_about_page_view,
     mainHome_page_view,
 
@@ -31,6 +32,7 @@ from personal.views import (
     add_building_view,
 
     remove_resident_view,
+    remove_building_view,
 )
 
 from account.views import (
@@ -113,6 +115,7 @@ urlpatterns = [
     path('add_building/', add_building_view, name='add_building'),
     
     path('remove_resident/<str:username>/', remove_resident_view, name='remove_resident'),
+    path('remove_building/<str:building_id>/', remove_building_view, name='remove_building'),
 ]
 
 

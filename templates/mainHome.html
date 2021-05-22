@@ -146,7 +146,7 @@
 										<td>{{building.owner_name}}</td>
 										<td>{{building.building_city}}</td>
 										<td><a class="btn btn-sm btn-info" href="{% url 'building_details' building.building_id %}">view</a></td>
-										<td><a class="btn btn-sm btn-danger" href="#">Remove</a></td>
+										<td><a class="btn btn-sm btn-danger" href="{% url 'remove_building' building.building_id %}">Remove</a></td>
 									</tr>
 								{% endfor %}
 							</tr>

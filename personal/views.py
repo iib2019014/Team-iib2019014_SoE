@@ -91,8 +91,20 @@ def remove_resident_view(request, username) :
     if request.POST :
         resident.delete()
         return redirect('mainHome')
+    
     context['resident'] = resident
     return render(request, 'personal/remove_resident.html', context)
+
+def remove_building_view(request, building_id) :
+    building = Building.objects.get(building_id=building_id)
+    context = {}
+
+    if request.POST :
+        building.delete()
+        return redirect('mainHome')
+    
+    context['building'] = building
+    return render(request, 'personal/remove_building.html', context)
 
 def weather_view(request) :
     name_url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&appid=6a7e7bb9b020d7b6efd7c58ac329e996'
