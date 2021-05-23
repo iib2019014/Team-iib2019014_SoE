@@ -35,6 +35,7 @@
 		</em>
 
 		{% if not request.user.is_staff %}
+		    <p style="color: aqua;">RESIDENT ACCESS AVAILABLE</p>
 			<div class="warning">
 				{% if request.user.the_building.temp_too_low %}
 					<p>Currently temperature in your apartment is very low</p>
@@ -46,8 +47,6 @@
 
 			<div class="building_temp_info">
 				<p>Your building name {{request.user.the_building.building_name}}</p>
-				<p>Located in  {{request.user.the_building.building_city}}</p>
-				<p>Owned by  {{request.user.the_building.owner_name}}</p>
 				<p>Building coordinates {{request.user.the_building.latitude}}°N, {{request.user.the_building.longitude}}°E</p>
 			</div>
 
@@ -89,6 +88,7 @@
 		{% endif %}
 
 		{% if request.user.is_staff %}
+		<p style="color: aqua;">ADMIN ACCESS AVAILABLE</p>
 			<br><br>
 			<div class="row" style="font-family: monospace;">
 				<div class="col-md-10">
