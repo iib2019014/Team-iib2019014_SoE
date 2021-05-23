@@ -98,9 +98,11 @@ class Building(models.Model) :
                 self.yesterday_max = self.max_temp
                 print("y max after : " + str(self.yesterday_max))
         self.last_update_date = today
-
+        
         if(self.building_city == None) :
+            print(self.building_city)
             self.building_city = r['name']
+        print(self.building_city)
         
         self.current_temp = r['main']['temp']
         if(self.current_temp < WARN_MIN) :
@@ -114,7 +116,7 @@ class Building(models.Model) :
             self.temp_too_high = False
 
         if(self.max_temp == None) :
-            self.max_temp = r['main']['temp_max']
+            self.max_temp = max(r['main']['temp_max'], self.yesterday_max, self.db_yesterday_max)
             self.till_now_max = self.max_temp
         else :
             if(self.current_temp > self.max_temp) :
@@ -124,7 +126,7 @@ class Building(models.Model) :
         print("max : " + str(self.max_temp))
 
         if(self.min_temp == None) :
-            self.min_temp = r['main']['temp_min']
+            self.min_temp = min(r['main']['temp_min'], self.yesterday_min, self.db_yesterday_min)
             self.till_now_min = self.min_temp
         else :
             if(self.current_temp < self.min_temp) :
